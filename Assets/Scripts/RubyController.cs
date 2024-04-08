@@ -20,6 +20,8 @@ public class RubyController : MonoBehaviour
     public AudioClip throwSound;
     public AudioClip hitSound;
     AudioSource audioSource;
+    public ParticleSystem HurtEffect;
+    public ParticleSystem HealEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -92,7 +94,13 @@ public class RubyController : MonoBehaviour
 
             isInvincible = true;
             invincibleTimer = timeInvincible;
+            ParticleSystem particleObject = Instantiate(HurtEffect, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
             PlaySound(hitSound);
+        }
+
+        if (amount > 0)
+        {
+            ParticleSystem particleObject = Instantiate(HealEffect, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
