@@ -20,8 +20,10 @@ public class RubyController : MonoBehaviour
     public AudioClip throwSound;
     public AudioClip hitSound;
     AudioSource audioSource;
-    public ParticleSystem HurtEffect;
-    public ParticleSystem HealEffect;
+    public GameObject HurtParticle;
+    public GameObject HealParticle;
+    //public ParticleSystem Hurtfab;
+    //public ParticleSystem Healfab;
 
     // Start is called before the first frame update
     void Start()
@@ -94,13 +96,13 @@ public class RubyController : MonoBehaviour
 
             isInvincible = true;
             invincibleTimer = timeInvincible;
-            ParticleSystem particleObject = Instantiate(HurtEffect, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+            //ParticleSystem particleObject = Instantiate(HurtEffect, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
             PlaySound(hitSound);
         }
 
         if (amount > 0)
         {
-            ParticleSystem particleObject = Instantiate(HealEffect, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+            //ParticleSystem particleObject = Instantiate(Healfab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
@@ -121,5 +123,30 @@ public class RubyController : MonoBehaviour
     public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
+    }
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("spikes"))
+        {
+            Hurt();
+        }
+
+        if (other.gameObject.CompareTag("health"))
+        {
+            Heal();
+        }
+    }
+
+    public void Hurt()
+    {
+        GameObject HurtEffect = Instantiate(HurtParticle, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+        HurtEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+    public void Heal()
+    {
+        GameObject HealEffect = Instantiate(HealParticle, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+        HealEffect.GetComponent<ParticleSystem>().Play();
     }
 }
