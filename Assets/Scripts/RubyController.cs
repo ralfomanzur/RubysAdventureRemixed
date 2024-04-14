@@ -8,7 +8,7 @@ public class RubyController : MonoBehaviour
     public int maxHealth = 5;
     public float timeInvincible = 2.0f;
     public int health { get { return currentHealth; } }
-    int currentHealth;
+    public int currentHealth;
     bool isInvincible;
     float invincibleTimer;
     Rigidbody2D rigidbody2d;
@@ -127,14 +127,27 @@ public class RubyController : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("spikes"))
+        if (other.gameObject.CompareTag("enemy"))
         {
             Hurt();
         }
 
-        if (other.gameObject.CompareTag("health"))
+        /*if (other.gameObject.CompareTag("health"))
         {
             Heal();
+        }*/
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("health") && currentHealth < 5)
+        {
+            Heal();
+        }
+
+        if (other.gameObject.CompareTag("spikes"))
+        {
+            Hurt();
         }
     }
 

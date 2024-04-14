@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyController : MonoBehaviour
 {
@@ -11,8 +12,11 @@ public class EnemyController : MonoBehaviour
     float timer;
     int direction = 1;
     Animator animator;
-    bool broken;
+    public bool broken;
     public ParticleSystem smokeEffect;
+    public TMPro.TextMeshProUGUI text;
+    public int botsFixed = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
+        text.text = "Robots Fixed: " + botsFixed;
 
         if (timer < 0)
         {
@@ -76,6 +81,7 @@ public class EnemyController : MonoBehaviour
 
     public void Fix()
     {
+        botsFixed++;
         broken = false;
         rb.simulated = false;
         smokeEffect.Stop();
