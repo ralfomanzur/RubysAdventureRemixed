@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Bot.GetComponent<EnemyController>().botsFixed == 1)
+        if (Bot.GetComponent<EnemyController>().botsFixed == 2)
         {
             WinPanel.SetActive(true);
             Ruby.SetActive(false);

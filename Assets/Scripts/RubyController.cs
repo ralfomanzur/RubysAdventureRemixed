@@ -19,9 +19,12 @@ public class RubyController : MonoBehaviour
     public GameObject projectilePrefab;
     public AudioClip throwSound;
     public AudioClip hitSound;
+    public AudioClip speechSound;
     AudioSource audioSource;
     public GameObject HurtParticle;
     public GameObject HealParticle;
+    public bool hasTwenty;
+    public bool hasSpreadShot;
     //public ParticleSystem Hurtfab;
     //public ParticleSystem Healfab;
 
@@ -61,7 +64,14 @@ public class RubyController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Launch();
+            if (hasSpreadShot)
+            {
+                LaunchSpreadShot();
+            }
+            else
+            {
+                Launch();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -73,11 +83,25 @@ public class RubyController : MonoBehaviour
                 if (character != null)
                 {
                     character.DisplayDialog();
+                    PlaySound(speechSound);
+                }
+                SketchController sketch = hit.collider.GetComponent<SketchController>();
+                if (sketch != null)
+                {
+                    sketch.DisplayDialog();
+                    PlaySound(speechSound);
                 }
             }
         }
     }
-
+    public void SetSpreadShot(bool value)
+        {
+        hasSpreadShot = value;
+        }
+    public void SetTwenty(bool value)
+        {
+        hasTwenty = value;
+        }
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
@@ -161,5 +185,19 @@ public class RubyController : MonoBehaviour
     {
         GameObject HealEffect = Instantiate(HealParticle, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
         HealEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+     void LaunchSpreadShot()
+    {
+        for (int i = -1; i <= 1; i++)
+        {
+            Vector2 spreadDirection = new Vector2(lookDirection.x, lookDirection.y + i * 0.1f);
+            GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+            Projectile projectile = projectileObject.GetComponent<Projectile>();
+            projectile.Launch(spreadDirection, 300);
+        }
+
+        animator.SetTrigger("Launch");
+        PlaySound(throwSound);
     }
 }
