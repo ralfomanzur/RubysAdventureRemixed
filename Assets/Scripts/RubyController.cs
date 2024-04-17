@@ -23,6 +23,7 @@ public class RubyController : MonoBehaviour
     AudioSource audioSource;
     public GameObject HurtParticle;
     public GameObject HealParticle;
+    //hasTwenty and hasSpreadshot added by Colby Sparkman.
     public bool hasTwenty;
     public bool hasSpreadShot;
     //public ParticleSystem Hurtfab;
@@ -85,6 +86,7 @@ public class RubyController : MonoBehaviour
                     character.DisplayDialog();
                     PlaySound(speechSound);
                 }
+                //Added by Colby Sparkman
                 SketchController sketch = hit.collider.GetComponent<SketchController>();
                 if (sketch != null)
                 {
@@ -94,6 +96,7 @@ public class RubyController : MonoBehaviour
             }
         }
     }
+    //SetSpreadShot and SetTwenty were added by Colby Sparkman
     public void SetSpreadShot(bool value)
         {
         hasSpreadShot = value;
@@ -187,6 +190,7 @@ public class RubyController : MonoBehaviour
         HealEffect.GetComponent<ParticleSystem>().Play();
     }
 
+     //LaunchSpreadShot was added by Colby Sparkman.
      void LaunchSpreadShot()
     {
         for (int i = -1; i <= 1; i++)

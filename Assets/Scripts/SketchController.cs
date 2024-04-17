@@ -10,7 +10,7 @@ public class SketchController : MonoBehaviour
     float timerDisplay;
 
     private RubyController rubyController;
-
+    //Anything referencing extraBox was written by Colby Sparkman. This script is a modified version of the NPCController
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +35,7 @@ public class SketchController : MonoBehaviour
 
     public void DisplayDialog()
 {
+    //Written by Colby Sparkman
     RubyController rubyController = FindObjectOfType<RubyController>();
     if (rubyController != null && rubyController.hasTwenty)
     {

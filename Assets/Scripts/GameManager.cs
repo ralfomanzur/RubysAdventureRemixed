@@ -21,20 +21,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Bot.GetComponent<EnemyController>().botsFixed == 2)
-        {
-            WinPanel.SetActive(true);
-            Ruby.SetActive(false);
-        }
+    if (Ruby.GetComponent<RubyController>().hasTwenty && Bot.GetComponent<EnemyController>().botsFixed >= 1)
+    {
+        WinPanel.SetActive(true);
+        Ruby.SetActive(false);
+    }
 
-        if (Ruby.GetComponent<RubyController>().currentHealth == 0)
+    if (Ruby.GetComponent<RubyController>().currentHealth == 0)
+    {
+        GameOverPanel.SetActive(true);
+        Ruby.SetActive(false);
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            GameOverPanel.SetActive(true);
-            Ruby.SetActive(false);
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                SceneManager.LoadScene("MainScene");
-            }
+            SceneManager.LoadScene("MainScene");
         }
     }
+}
 }

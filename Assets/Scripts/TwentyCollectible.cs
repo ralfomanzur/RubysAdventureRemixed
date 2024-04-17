@@ -5,7 +5,8 @@ using UnityEngine;
 public class TwentyCollectible : MonoBehaviour
 {
     public AudioClip collectedClip;
-
+    
+    //Written by Colby Sparkman
     void OnTriggerEnter2D(Collider2D other)
     {
         RubyController controller = other.GetComponent<RubyController>();
