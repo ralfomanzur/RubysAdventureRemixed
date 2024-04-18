@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wasCalled: 0
+  manager: {fileID: 0}

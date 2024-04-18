@@ -26,8 +26,6 @@ public class RubyController : MonoBehaviour
     //hasTwenty and hasSpreadshot added by Colby Sparkman.
     public bool hasTwenty;
     public bool hasSpreadShot;
-    //public ParticleSystem Hurtfab;
-    //public ParticleSystem Healfab;
 
     // Start is called before the first frame update
     void Start()
@@ -98,13 +96,15 @@ public class RubyController : MonoBehaviour
     }
     //SetSpreadShot and SetTwenty were added by Colby Sparkman
     public void SetSpreadShot(bool value)
-        {
+    {
         hasSpreadShot = value;
-        }
+    }
+
     public void SetTwenty(bool value)
-        {
+    {
         hasTwenty = value;
-        }
+    }
+
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
@@ -158,11 +158,6 @@ public class RubyController : MonoBehaviour
         {
             Hurt();
         }
-
-        /*if (other.gameObject.CompareTag("health"))
-        {
-            Heal();
-        }*/
     }
 
     public void OnTriggerEnter2D(Collider2D other)

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class EnemyController : MonoBehaviour
 {
@@ -14,8 +13,7 @@ public class EnemyController : MonoBehaviour
     Animator animator;
     public bool broken;
     public ParticleSystem smokeEffect;
-    public TMPro.TextMeshProUGUI text;
-    public int botsFixed = 0;
+    public GameObject manager;
 
 
     // Start is called before the first frame update
@@ -30,7 +28,6 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-        text.text = "Robots Fixed: " + botsFixed;
 
         if (timer < 0)
         {
@@ -79,12 +76,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // I added a line here to link the bots to the manager, correctly adding to the "Robots Fixed" score - Ralfo M
     public void Fix()
     {
-        botsFixed++;
         broken = false;
         rb.simulated = false;
         smokeEffect.Stop();
         animator.SetTrigger("Fixed");
+        manager.GetComponent<GameManager>().botsFixed++;
     }
 }
