@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Text botText;
     public int botsFixed = 0;
     public Image sketchText;
+    public GameObject collectibleText;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
             {
                 WinPanel.SetActive(true);
                 Ruby.SetActive(false);
+                botText.enabled = false;
+                collectibleText.SetActive(false);
             }
         }
         

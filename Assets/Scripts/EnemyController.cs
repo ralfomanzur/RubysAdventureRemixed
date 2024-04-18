@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     public bool broken;
     public ParticleSystem smokeEffect;
     public GameObject manager;
+    public AudioClip repaired;
 
 
     // Start is called before the first frame update
@@ -84,5 +85,6 @@ public class EnemyController : MonoBehaviour
         smokeEffect.Stop();
         animator.SetTrigger("Fixed");
         manager.GetComponent<GameManager>().botsFixed++;
+        AudioSource.PlayClipAtPoint(repaired, this.gameObject.transform.position);
     }
 }

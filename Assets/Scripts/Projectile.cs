@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     Rigidbody2D rb;
     public bool wasCalled;
+    public AudioClip hit;
 
     // Start is called before the first frame update
     void Awake()
@@ -36,5 +37,11 @@ public class Projectile : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    // Plays metallic sound when cog hits something - Ralfo M
+    void OnDestroy()
+    {
+        AudioSource.PlayClipAtPoint(hit, this.gameObject.transform.position);
     }
 }
